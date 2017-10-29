@@ -93,23 +93,28 @@ class BrightnessState(object):
         subprocess.call(command, shell=True)
 
     def load_config(self, config_path):
-        # TODO: load config
-        # - check file existence
-        # - read
-        # - validate values
-
-        # current_path = os.path.dirname(os.path.realpath(__file__))
-        # config_path = os.path.join(current_path, 'config.ini')
-
         config = configparser.ConfigParser()
         config.read(config_path)
         if 'Brightness' in config.sections():
-            pass
-            # if base_increment <= 0 \
-            #    or base_increment >= 100 \
-            #    or not isinstance(base_increment, float):
-            #     raise ValueError('base_increment is a float between 0. and 100.')
-            # self.base_increment = base_increment
+            section = config['Brightness']
 
-            # self.actual_brightness = self.read_actual_brightness()
-            # self.max_brightness = self.read_max_brightness()
+            self.backlight_path = section.get(
+                'backlight_path',
+                BrightnessState.DEFAULT_BACKLIGHT_PATH
+            )
+            self.actual_brightness_file = section.get(
+                'actual_brightness',
+                BrightnessState.DEFAULT_ACTUAL_BRIGHTNESS_FILE
+            )
+            self.max_brightness_file = section.get(
+                'max_brightness',
+                BrightnessState.DEFAULT_MAX_BRIGHTNESS_FILE
+            )
+            self.brightness_file = section.get(
+                'brightness',
+                BrightnessState.DEFAULT_BRIGHTNESS_FILE
+            )
+            self.increment = section.get(
+                'increment',
+                BrightnessState.DEFAULT_INCREMENT
+            )
