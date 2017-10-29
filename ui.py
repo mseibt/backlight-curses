@@ -1,13 +1,9 @@
 import curses
 
-from state import BrightnessState
 
-
-def draw_menu(stdscr):
+def draw_menu(stdscr, brightness_state=None):
     """ inspired by https://gist.github.com/claymcleod/b670285f334acd56ad1c"""
-
     k = 0
-    brightness_state = BrightnessState()
 
     # Clear and refresh the screen for a blank canvas
     stdscr.clear()
@@ -69,5 +65,5 @@ def draw_menu(stdscr):
         k = stdscr.getch()
 
 
-def ui():
-    curses.wrapper(draw_menu)
+def ui(brightness_state):
+    curses.wrapper(draw_menu, brightness_state=brightness_state)
