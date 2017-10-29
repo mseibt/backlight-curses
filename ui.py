@@ -28,6 +28,12 @@ def draw_menu(stdscr):
             brightness_state.lower_brightness()
         elif k in [curses.KEY_UP, curses.KEY_RIGHT]:
             brightness_state.higher_brightness()
+        elif k in range(48, 58):
+            # calculate the percentage for a given number
+            # ascii number offset * 10%
+            # 0 -> 0%; 1 -> 10%; ...; 9 -> 90%
+            percentage = (k - 48)*10
+            brightness_state.absolute_brightness(percentage)
 
         # Title
         title = "Brightness Level"
