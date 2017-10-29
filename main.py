@@ -1,4 +1,4 @@
-from ui import ui
+#!/usr/bin/env python3
 
 from state import BrightnessState
 
