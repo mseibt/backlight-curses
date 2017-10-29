@@ -103,18 +103,18 @@ class BrightnessState(object):
                 BrightnessState.DEFAULT_BACKLIGHT_PATH
             )
             self.actual_brightness_file = section.get(
-                'actual_brightness',
+                'actual_brightness_file',
                 BrightnessState.DEFAULT_ACTUAL_BRIGHTNESS_FILE
             )
             self.max_brightness_file = section.get(
-                'max_brightness',
+                'max_brightness_file',
                 BrightnessState.DEFAULT_MAX_BRIGHTNESS_FILE
             )
             self.brightness_file = section.get(
-                'brightness',
+                'brightness_file',
                 BrightnessState.DEFAULT_BRIGHTNESS_FILE
             )
-            self.increment = section.get(
+            self.increment = int(section.get(
                 'increment',
                 BrightnessState.DEFAULT_INCREMENT
-            )
+            ))
