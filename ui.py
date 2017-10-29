@@ -36,10 +36,11 @@ def draw_menu(stdscr):
             brightness_state.absolute_brightness(percentage)
 
         # Title
-        title = "Brightness Level"
+        title = "Brightness Level"[:width-1]
 
         # Value
         val = str(brightness_state.percentage) + "%"
+        val = val[:width-1]
 
         # Centering calculations
         start_x_title = width // 2 - len(title) // 2
@@ -47,14 +48,19 @@ def draw_menu(stdscr):
         start_y = height // 2
 
         # Rendering title
-        stdscr.attron(curses.color_pair(1))
-        stdscr.attron(curses.A_BOLD)
-        stdscr.addstr(start_y - 1, start_x_title, title)
-        stdscr.attroff(curses.color_pair(1))
-        stdscr.attroff(curses.A_BOLD)
+        if height >= 3:
+            stdscr.attron(curses.color_pair(1))
+            stdscr.attron(curses.A_BOLD)
+            stdscr.addstr(start_y - 1, start_x_title, title)
+            stdscr.attroff(curses.color_pair(1))
+            stdscr.attroff(curses.A_BOLD)
 
         # Rendering value
-        stdscr.addstr(start_y + 1, start_x_val, val)
+        if height >= 3:
+            start_y_val = start_y + 1
+        else:
+            start_y_val = 1
+        stdscr.addstr(start_y_val, start_x_val, val)
 
         # Refresh the screen
         stdscr.refresh()
